@@ -1,6 +1,9 @@
 # Inplaypostziel & Post-Challenges
 Mit diesem Plugin kann für einen beliebigen Zeitraum ein Inplaypost-Ziel vorgegeben werden für das gesamte Forum. Zusätzlich haben User die Möglichkeit persönliche Post-Challenges zu starten.
 
+# Vorrausetzung
+- Der <a href="https://www.mybb.de/erweiterungen/18x/plugins-verschiedenes/enhanced-account-switcher/" target="_blank">Accountswitcher</a> von doylecc <b>muss</b> installiert sein.
+  
 # Datenbank-Änderungen
 hinzugefügte Tabelle:
 - PRÄFIX_user_postchallenges
