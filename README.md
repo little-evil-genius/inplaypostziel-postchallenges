@@ -508,3 +508,12 @@ Es wird automatisch in jedes bestehende und neue Design hinzugefügt. Man sollte
 - persönliche Challenges im UserCP: LINK/usercp.php?action=postchallenges
 
 # Demo
+<img src="https://stormborn.at/plugins/inplaymarathon_index_count.png">
+<img src="https://stormborn.at/plugins/inplaymarathon_index_goal.png">
+<img src="https://stormborn.at/plugins/inplaymarathon_index_progressbar.png">
+<img src="https://stormborn.at/plugins/inplaymarathon_toplist_character.png">
+<img src="https://stormborn.at/plugins/inplaymarathon_toplist_spieler.png">
+<img src="https://stormborn.at/plugins/postchallenges_overview_active.png">
+<img src="https://stormborn.at/plugins/postchallenges_overview_finished.png">
+<img src="https://stormborn.at/plugins/postchallenges_usercp_active.png">
+<img src="https://stormborn.at/plugins/postchallenges_usercp_add.png">
