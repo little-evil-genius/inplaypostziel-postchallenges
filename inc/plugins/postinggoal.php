@@ -47,7 +47,7 @@ function postinggoal_install(){
 		`words` INT(15) unsigned DEFAULT '0' NOT NULL,
 		`characters` INT(15) unsigned DEFAULT '0' NOT NULL,
         `days` int(5) unsigned NOT NULL,
-        `startdate` int(15) unsigned utf8_general_ci NOT NULL,
+        `startdate` int(15) unsigned NOT NULL,
         `enddate` int(15) unsigned NOT NULL,
         `reportstatus` int(1) unsigned NOT NULL DEFAULT '0',
         PRIMARY KEY(`pgid`),
