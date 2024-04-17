@@ -1553,16 +1553,16 @@ function postinggoal_misc(){
         $all_characters = [];
         foreach ($all_mainaccounts as $mainuid) {
 
-            $all_charas = postinggoal_get_allchars($mainuid);
-            $all_charastring = implode(",", array_keys($all_charas));
-
+            $main_charas = postinggoal_get_allchars($mainuid);
+            $main_charastring = implode(",", array_keys($main_charas));
+		
             $topplayer_query = $db->query("SELECT uid, message FROM ".TABLE_PREFIX."posts p
             LEFT JOIN ".TABLE_PREFIX."forums f ON (f.fid = p.fid)
             WHERE p.dateline BETWEEN '".$start_timestamp."' AND '".$end_timestamp."'
             ".$parentlist_sql."
             ".$excludedarea_sql."
             AND p.visible = '1'
-            AND p.uid IN (".$all_charastring.")
+            AND p.uid IN (".$main_charastring.")
             ".$excludedaccounts_sql."
             ");
 
