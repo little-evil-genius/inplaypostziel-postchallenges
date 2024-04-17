@@ -105,7 +105,7 @@ $l['postinggoal_overview_finished_goal_posts'] = "<b>{1}</b> Posts in <b>{2}</b>
 $l['postinggoal_overview_finished_prematuredays'] = " - {1} {2} früher beendet";
 
 $l['postgoals_online_location_toplist_character'] = "Schaut sich die <a href=\"misc.php?action=postgoals_character\">Topliste nach Charakteren</a> vom Postmarathon an.";
-$l['postgoals_online_location_toplist_player'] = "Schaut sich die <a href=\"misc.php?action=postgoals_character\">Topliste nach Spieler*innen</a> vom Postmarathon an.";
-$l['postgoals_online_location_overview_active'] = "Schaut sich die <a href=\"misc.php?action=postchallenges_overview_active\">aktiven persönlichen Post-Challenges</a> vom Forum an.";
-$l['postgoals_online_location_overview_finished'] = "Schaut sich die <a href=\"misc.php?action=postchallenges_overview_finished\">vergangenen persönlichen Post-Challenges</a> vom Forum an.";
-$l['postgoals_online_location_usercp'] = "Schaut sich die <a href=\"misc.php?action=usercp.php?action=postchallenges\">eigenen persönlichen Post-Challenges</a> im Usercp an.";
+$l['postgoals_online_location_toplist_player'] = "Schaut sich die <a href=\"misc.php?action=postgoals_player\">Topliste nach Spieler*innen</a> vom Postmarathon an.";
+$l['postgoals_online_location_overview_active'] = "Schaut sich die <a href=\"misc.php?action=postchallenges_overview_active\">Übersicht aller aktiven Post-Challenges</a> vom Forum an.";
+$l['postgoals_online_location_overview_finished'] = "Schaut sich die <a href=\"misc.php?action=postchallenges_overview_finished\">Übersicht aller vergangenen Post-Challenges</a> vom Forum an.";
+$l['postgoals_online_location_usercp'] = "Schaut sich die <a href=\"usercp.php?action=postchallenges\">eigenen persönlichen Post-Challenges</a> im Usercp an.";
