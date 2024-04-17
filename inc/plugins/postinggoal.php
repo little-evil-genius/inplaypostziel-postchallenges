@@ -1480,7 +1480,7 @@ function postinggoal_misc(){
                 $name = build_profile_link($charactername, $userid);
             } else {
                 $charactername = $userid;
-                $name = $charactername;
+                $name = $userid;
             }
             $countposts = number_format($postcount, '0', ',', '.');
             $countwords = number_format($all_words[$userid], '0', ',', '.');    
@@ -1555,7 +1555,7 @@ function postinggoal_misc(){
 
             $main_charas = postinggoal_get_allchars($mainuid);
             $main_charastring = implode(",", array_keys($main_charas));
-		
+
             $topplayer_query = $db->query("SELECT uid, message FROM ".TABLE_PREFIX."posts p
             LEFT JOIN ".TABLE_PREFIX."forums f ON (f.fid = p.fid)
             WHERE p.dateline BETWEEN '".$start_timestamp."' AND '".$end_timestamp."'
@@ -1877,7 +1877,7 @@ function postinggoal_misc(){
                 $report_enddate = $chell['enddate'];
 
                 // Die beiden Daten sind gleich
-                if ($original_enddate == $report_enddate) {
+                if (date('Y-m-d', $original_enddate) == date('Y-m-d', $report_enddate)) {
                     $enddate_timestamp = $chell['enddate'];
                     $enddate_date = date($mybb->settings['dateformat'], $enddate_timestamp);
                     $premature_days_lang = "";
@@ -2312,7 +2312,7 @@ function postinggoal_usercp() {
                 $report_enddate = $chell['enddate'];
 
                 // Die beiden Daten sind gleich
-                if ($original_enddate == $report_enddate) {
+                if (date('Y-m-d', $original_enddate) == date('Y-m-d', $report_enddate)) {
                     $enddate_timestamp = $chell['enddate'];
                     $enddate_date = date($mybb->settings['dateformat'], $enddate_timestamp);
                     $premature_days_lang = "";
