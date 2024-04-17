@@ -16,7 +16,7 @@ $l['postinggoal_redirect_toplist'] = "Die Topliste für den Postmarathon ist akt
 $l['postinggoal_toplist_nav'] = "Toplisten";
 $l['postinggoal_toplist_nav_character'] = "Charakter-Topliste";
 $l['postinggoal_toplist_nav_player'] = "Spieler*in-Topliste";
-$l['postinggoal_toplist_character'] = "Topliste der Charakteren";
+$l['postinggoal_toplist_character'] = "Topliste der Charaktere";
 $l['postinggoal_toplist_player'] = "Topliste der Spieler*innen";
 $l['postinggoal_toplist_character_head'] = "Charakter";
 $l['postinggoal_toplist_player_head'] = "Spieler*in";
@@ -64,7 +64,7 @@ $l['postinggoal_usercp_challenge_report_message_prematuredays_plural'] = "Ich ha
 $l['postinggoal_usercp_challenge_report_message_prematuredays_singular'] = "Ich habe es sogar einen Tag früher geschafft als geplant.";
 $l['postinggoal_usercp_challenge_report_message_additive_full'] = "Zusätzlich habe ich mir das Ziel gesetzt {1} Wörter und {2} Zeichen und zu schreiben.<br>";
 $l['postinggoal_usercp_challenge_report_message_additive_words'] = "Zusätzlich habe ich mir das Ziel gesetzt {1} Wörter zu schreiben.<br>";
-$l['postinggoal_usercp_challenge_report_message_additive_characters'] = "Zusätzlich habe ich mir das Ziel gesetzt {1} Zeichen und zu schreiben.<br>";;
+$l['postinggoal_usercp_challenge_report_message_additive_characters'] = "Zusätzlich habe ich mir das Ziel gesetzt {1} Zeichen und zu schreiben.<br>";
 
 $l['postinggoal_usercp_challenge_finished_headline'] = "vergangene Challenges";
 $l['postinggoal_usercp_challenge_finished_none'] = "<center>Aktuell hast du noch keine persönliche Post-Challenge beendet.</center>";
@@ -80,7 +80,7 @@ $l['postinggoal_usercp_challenge_finished_goalstatus_notreached'] = "<span class
 $l['postinggoal_usercp_challenge_finished_prematuredays'] = " - {1} {2} früher beendet ({3})";
 
 $l['postinggoal_redirect_overview'] = "Das Team hat die Möglichkeit eine Übersicht für persönliche Post-Challenges deaktiviert. Du wirst nun auf den Index zurückgeleitet.";
-$l['postinggoal_overview_permissions'] = "Du hast keine Berechtigung die Übersicht alle persönlichen Post-Challenges einzusehen.";
+$l['postinggoal_overview_permissions'] = "Du hast keine Berechtigung die Übersicht aller persönlichen Post-Challenges einzusehen.";
 $l['postinggoal_overview_nav'] = "Übersicht der persönlichen Post-Challenges";
 $l['postinggoal_overview_nav_active'] = "Aktive Post-Challenges";
 $l['postinggoal_overview_nav_finished'] = "Vergangene Post-Challenges";
