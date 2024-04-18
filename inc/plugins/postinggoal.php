@@ -653,10 +653,16 @@ function postinggoal_install(){
     );
     $db->insert_query("templates", $insert_array); 
 
+    
+
+	require_once MYBB_ADMIN_DIR."inc/functions_themes.php";
+
     // STYLESHEET HINZUFÜGEN
-    require_once MYBB_ADMIN_DIR."inc/functions_themes.php";
     $css = array(
-        'name' => '.postinggoal_index {
+		'name' => 'postinggoal.css',
+		'tid' => 1,
+		'attachedto' => '',
+		"stylesheet" =>	'.postinggoal_index {
             background: #fff;
             width: 100%;
             margin: auto auto;
@@ -688,7 +694,7 @@ function postinggoal_install(){
             border-color: #fff #ddd #ddd #fff;
             padding: 10px 0;
             justify-content: space-around;
-            align-items: center; 
+            align-items: center;
         }
         
         .postinggoal_index-counter-bit {
@@ -718,12 +724,12 @@ function postinggoal_install(){
         
         .postinggoal_index-toplist a:link,
         .postinggoal_index-toplist a:visited,
-        .postinggoal_index-toplist a:active {	
+        .postinggoal_index-toplist a:active {    
             color: #444;
             text-decoration: none;
         }
         
-        .postinggoal_index-toplist a:hover {	
+        .postinggoal_index-toplist a:hover {    
             text-decoration: underline;
         }
         
@@ -1093,17 +1099,17 @@ function postinggoal_install(){
             font-size: 12px;
             font-weight: bold;
         }',
-        'cachefile' => $db->escape_string(str_replace('/', '', 'postinggoal.css')),
-        'lastmodified' => time()
-    );
+		'cachefile' => $db->escape_string(str_replace('/', '', 'postinggoal.css')),
+		'lastmodified' => time()
+	);
     
     $sid = $db->insert_query("themestylesheets", $css);
-    $db->update_query("themestylesheets", array("cachefile" => "postinggoal.css"), "sid = '".$sid."'", 1);
+	$db->update_query("themestylesheets", array("cachefile" => "css.php?stylesheet=".$sid), "sid = '".$sid."'", 1);
 
-    $tids = $db->simple_select("themes", "tid");
-    while($theme = $db->fetch_array($tids)) {
-        update_theme_stylesheet_list($theme['tid']);
-    }
+	$tids = $db->simple_select("themes", "tid");
+	while($theme = $db->fetch_array($tids)) {
+		update_theme_stylesheet_list($theme['tid']);
+	}
 }
  
 // Funktion zur Überprüfung des Installationsstatus; liefert true zurürck, wenn Plugin installiert, sonst false (optional).
