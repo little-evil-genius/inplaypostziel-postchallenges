@@ -14,6 +14,7 @@ $plugins->add_hook('usercp_start', 'postinggoal_usercp');
 $plugins->add_hook('usercp_menu', 'postinggoal_usercpmenu', 40);
 $plugins->add_hook("fetch_wol_activity_end", "postinggoal_online_activity");
 $plugins->add_hook("build_friendly_wol_location_end", "postinggoal_online_location");
+$plugins->add_hook("admin_user_users_delete_commit", "postinggoal_user_delete");
 
 // Die Informationen, die im Pluginmanager angezeigt werden
 function postinggoal_info(){
@@ -1238,7 +1239,7 @@ function postinggoal_global(){
     // Rangliste
     $toplist_activate = $mybb->settings['postinggoal_marathon_toplist'];
 
-    // zurück, wenn es nicht aktiv ist
+    // zurück, wenn es nicht kein Marathon aktiv ist
     $postinggoal_marathon = "";
     if ($activate_marathon == 0) return;
 
@@ -2743,6 +2744,28 @@ function postinggoal_online_location($plugin_array) {
 	}
 
 	return $plugin_array;
+}
+
+// USER WIRD GELÖSCHT
+function postinggoal_user_delete(){
+
+    global $db, $cache, $mybb, $user;
+    
+    // UID gelöschter Chara
+    $deleteChara = (int)$user['uid'];
+
+    $as_uid = $db->fetch_field($db->simple_select("users", "as_uid", "uid = '".$deleteChara."'"), "as_uid");
+    // Hauptaccount => löschen
+    if ($as_uid == 0) {
+        $db->delete_query('user_postchallenges', "uid = ".$deleteChara."");
+    } 
+    // Zweitaccount => update
+    else {
+        $update_challenge = [
+            "uid" => (int)$as_uid,   
+        ];
+        $db->update_query("user_postchallenges", $update_challenge, "uid = '".$deleteChara."'");
+    }
 }
 
 // ACCOUNTSWITCHER HILFSFUNKTION
