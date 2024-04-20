@@ -507,6 +507,13 @@ Es wird automatisch in jedes bestehende und neue Design hinzugefügt. Man sollte
 - Übersicht aller vergangenen Post-Challenges: LINK/misc.php?action=postchallenges_overview_finished
 - persönliche Challenges im UserCP: LINK/usercp.php?action=postchallenges
 
+# extra Variabeln
+Bei der Charakterstatistik (Tpl: postinggoal_challenges_usercp_characters) im User-CP bei der aktiven Challenge, kann man die Charakternamen verschieden darstellen:
+- normaler Name: {$charactername}
+- mit Gruppenfarbe: {$charactername_formated}
+- mit Gruppenfarben als Link: {$charactername_link}
+- Vorname: {$charactername_first} & Nachname: {$charactername_last}
+
 # Demo
 <img src="https://stormborn.at/plugins/inplaymarathon_index_count.png">
 <img src="https://stormborn.at/plugins/inplaymarathon_index_goal.png">
