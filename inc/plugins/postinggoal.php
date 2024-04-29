@@ -24,7 +24,7 @@ function postinggoal_info(){
 		"website"	=> "https://github.com/little-evil-genius/inplaypostziel-postchallenges",
         "author"	=> "little.evil.genius",
 		"authorsite"	=> "https://storming-gates.de/member.php?action=profile&uid=1712",
-		"version"	=> "1.0",
+		"version"	=> "1.1",
 		"compatibility" => "18*"
 	);
 }
@@ -2773,8 +2773,8 @@ function postinggoal_get_allchars($uid) {
 	global $db, $cache, $mybb, $lang, $templates, $theme, $header, $headerinclude, $footer;
 
 	//für den fall nicht mit hauptaccount online
-	if (isset($mybb->user['as_uid'])) {
-        $as_uid = intval($mybb->user['as_uid']);
+	if (isset(get_user($uid)['as_uid'])) {
+        $as_uid = intval(get_user($uid)['as_uid']);
     } else {
         $as_uid = 0;
     }
