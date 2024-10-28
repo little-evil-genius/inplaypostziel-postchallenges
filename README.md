@@ -5,7 +5,7 @@ Zum einem bietet es die Möglichkeit von einem sogenannten Inplaymarathon, bei d
 Zum Anderen bietet dieses Plugin den Usern die Möglichkeit, eigene und persönliche Postziele, sogenannte Post-Challenges, im Usercp festzulegen. Hierbei können sie sich ein Postziel in einer festgelegten Anzahl von Tagen setzen und optional auch ein Wort- und Zeichenziel definieren. Die Fortschritte können im Usercp verfolgt werden. Wenn das Team ein entsprechendes Thema eingerichtet hat, können die User mit einem Klick melden, wenn sie eine Post-Challenge erfolgreich abgeschlossen haben. Eine automatische Nachricht mit allen wichtigen Informationen wird dann in diesem Thema gepostet. Zusätzlich gibt es Übersichtsseiten für aktive und vergangene Post-Challenges vom gesammten Forum.
 
 # Vorrausetzung
-- Der <a href="https://www.mybb.de/erweiterungen/18x/plugins-verschiedenes/enhanced-account-switcher/" target="_blank">Accountswitcher</a> von doylecc <b>muss</b> installiert sein.
+- Der <a href="https://doylecc.altervista.org/bb/downloads.php?dlid=26&cat=2" target="_blank">Accountswitcher</a> von doylecc <b>muss</b> installiert sein.
   
 # Datenbank-Änderungen
 hinzugefügte Tabelle:
