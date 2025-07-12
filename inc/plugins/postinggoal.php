@@ -16,7 +16,7 @@ $plugins->add_hook('usercp_start', 'postinggoal_usercp');
 $plugins->add_hook('usercp_menu', 'postinggoal_usercpmenu', 40);
 $plugins->add_hook("fetch_wol_activity_end", "postinggoal_online_activity");
 $plugins->add_hook("build_friendly_wol_location_end", "postinggoal_online_location");
-$plugins->add_hook("admin_user_users_delete_commit", "postinggoal_user_delete");
+$plugins->add_hook("datahandler_user_delete_end", "postinggoal_user_delete");
 
 // Die Informationen, die im Pluginmanager angezeigt werden
 function postinggoal_info(){
@@ -26,7 +26,7 @@ function postinggoal_info(){
 		"website"	=> "https://github.com/little-evil-genius/inplaypostziel-postchallenges",
         "author"	=> "little.evil.genius",
 		"authorsite"	=> "https://storming-gates.de/member.php?action=profile&uid=1712",
-		"version"	=> "1.2",
+		"version"	=> "1.3",
 		"compatibility" => "18*"
 	);
 }
@@ -757,7 +757,11 @@ function postinggoal_misc(){
         eval("\$navigation = \"".$templates->get("postinggoal_challenges_overview_navigation")."\";");
 
         $perpage = 10;
-        $count_active = $db->num_rows($db->query("SELECT * FROM ".TABLE_PREFIX."user_postchallenges WHERE enddate > ".$today_time." AND reportstatus = 0"));
+        $count_active = $db->num_rows($db->query("SELECT * FROM ".TABLE_PREFIX."user_postchallenges 
+        WHERE enddate > ".$today_time." 
+        AND reportstatus = 0
+        AND uid IN (SELECT uid FROM ".TABLE_PREFIX."users)
+        "));
         $input_page = $mybb->get_input('page', MyBB::INPUT_INT);
         if($input_page) {
             $start = ($input_page-1) *$perpage;
@@ -783,6 +787,7 @@ function postinggoal_misc(){
         $active_challenge = $db->query("SELECT * FROM ".TABLE_PREFIX."user_postchallenges
         WHERE enddate > ".$today_time."
         AND reportstatus = 0
+        AND uid IN (SELECT uid FROM ".TABLE_PREFIX."users)
         ORDER BY enddate ASC
         ".$multipage_sql."
         ");
@@ -922,7 +927,10 @@ function postinggoal_misc(){
         eval("\$navigation = \"".$templates->get("postinggoal_challenges_overview_navigation")."\";");
 
         $perpage = 10;
-        $count_finished = $db->num_rows($db->query("SELECT * FROM ".TABLE_PREFIX."user_postchallenges WHERE enddate < ".$today_time." OR reportstatus = 1"));
+        $count_finished = $db->num_rows($db->query("SELECT * FROM ".TABLE_PREFIX."user_postchallenges 
+        WHERE (enddate < ".$today_time." OR reportstatus = 1)
+        AND uid IN (SELECT uid FROM ".TABLE_PREFIX."users)
+        "));
         $input_page = $mybb->get_input('page', MyBB::INPUT_INT);
         if($input_page) {
             $start = ($input_page-1) *$perpage;
@@ -946,8 +954,8 @@ function postinggoal_misc(){
 
         // AKTUELLE CHALLENGE
         $finished_challenge = $db->query("SELECT * FROM ".TABLE_PREFIX."user_postchallenges
-        WHERE enddate < ".$today_time."
-        AND enddate < ".$today_time." OR reportstatus = 1
+        WHERE (enddate < ".$today_time." OR reportstatus = 1)
+        AND uid IN (SELECT uid FROM ".TABLE_PREFIX."users)
         ORDER BY enddate DESC
         ".$multipage_sql."
         ");
@@ -1863,24 +1871,28 @@ function postinggoal_online_location($plugin_array) {
 }
 
 // USER WIRD GELÖSCHT
-function postinggoal_user_delete(){
+function postinggoal_user_delete($userhandler) {
 
-    global $db, $cache, $mybb, $user;
-    
-    // UID gelöschter Chara
-    $deleteChara = (int)$user['uid'];
+    global $db;
 
-    $as_uid = $db->fetch_field($db->simple_select("users", "as_uid", "uid = '".$deleteChara."'"), "as_uid");
-    // Hauptaccount => löschen
-    if ($as_uid == 0) {
-        $db->delete_query('user_postchallenges', "uid = ".$deleteChara."");
-    } 
-    // Zweitaccount => update
-    else {
-        $update_challenge = [
-            "uid" => (int)$as_uid,   
-        ];
-        $db->update_query("user_postchallenges", $update_challenge, "uid = '".$deleteChara."'");
+    $uids = $userhandler->delete_uids;
+    $uid_list = explode(',', $uids);
+    foreach ($uid_list as $uid) {
+
+        $deleteChara = (int)$uid;
+
+        $as_uid = $db->fetch_field($db->simple_select("users", "as_uid", "uid = '".$deleteChara."'"), "as_uid");
+        // Hauptaccount => löschen
+        if ($as_uid == 0) {
+            $db->delete_query('user_postchallenges', "uid = ".$deleteChara."");
+        } 
+        // Zweitaccount => update
+        else {
+            $update_challenge = [
+                "uid" => (int)$as_uid,   
+            ];
+            $db->update_query("user_postchallenges", $update_challenge, "uid = '".$deleteChara."'");
+        }
     }
 }
 
