@@ -2027,7 +2027,7 @@ function postinggoal_database() {
             PRIMARY KEY(`pgid`),
             KEY `pgid` (`pgid`)
             )
-            ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1
+            ENGINE=InnoDB ".$db->build_create_table_collation().";
         ");
     }
 }
