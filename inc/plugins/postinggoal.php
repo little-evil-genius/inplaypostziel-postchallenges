@@ -26,7 +26,7 @@ function postinggoal_info(){
 		"website"	=> "https://github.com/little-evil-genius/inplaypostziel-postchallenges",
         "author"	=> "little.evil.genius",
 		"authorsite"	=> "https://storming-gates.de/member.php?action=profile&uid=1712",
-		"version"	=> "1.3",
+		"version"	=> "1.3.1",
 		"compatibility" => "18*"
 	);
 }
@@ -265,6 +265,34 @@ function postinggoal_admin_update_plugin(&$table) {
 
         // Datenbanktabellen & Felder
         postinggoal_database();
+
+        // Collation prüfen und korrigieren
+        $charset = 'utf8mb4';
+        $collation = 'utf8mb4_unicode_ci';
+
+        $collation_string = $db->build_create_table_collation();
+        if (preg_match('/CHARACTER SET ([^\s]+)\s+COLLATE ([^\s]+)/i', $collation_string, $matches)) {
+            $charset = $matches[1];
+            $collation = $matches[2];
+        }
+
+        $databaseTables = [
+            "user_postchallenges"
+        ];
+
+        foreach ($databaseTables as $databaseTable) {
+            if ($db->table_exists($databaseTable)) {
+                $table = TABLE_PREFIX.$databaseTable;
+
+                $query = $db->query("SHOW TABLE STATUS LIKE '".$db->escape_string($table)."'");
+                $table_status = $db->fetch_array($query);
+                $actual_collation = strtolower($table_status['Collation'] ?? '');
+
+                if (!empty($collation) && $actual_collation !== strtolower($collation)) {
+                    $db->query("ALTER TABLE {$table} CONVERT TO CHARACTER SET {$charset} COLLATE {$collation}");
+                }
+            }
+        }
 
         flash_message($lang->plugins_flash, "success");
         admin_redirect("index.php?module=rpgstuff-plugin_updates");
@@ -3147,10 +3175,40 @@ function postinggoal_stylesheet_update() {
 // UPDATE CHECK
 function postinggoal_is_updated(){
 
-    global $db, $mybb;
+    global $db;
 
-    if (isset($mybb->settings['postinggoal_space'])) {
-        return true;
+    $charset = 'utf8mb4';
+    $collation = 'utf8mb4_unicode_ci';
+
+    $collation_string = $db->build_create_table_collation();
+    if (preg_match('/CHARACTER SET ([^\s]+)\s+COLLATE ([^\s]+)/i', $collation_string, $matches)) {
+        $charset = strtolower($matches[1]);
+        $collation = strtolower($matches[2]);
     }
-    return false;
+
+    $databaseTables = [
+        "user_postchallenges"
+    ];
+
+    foreach ($databaseTables as $table_name) {
+        if (!$db->table_exists($table_name)) {
+            return false;
+        }
+
+        $full_table_name = TABLE_PREFIX . $table_name;
+
+        $query = $db->query("
+            SELECT TABLE_COLLATION 
+            FROM information_schema.TABLES 
+            WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '".$db->escape_string($full_table_name)."'
+        ");
+        $result = $db->fetch_array($query);
+        $actual_collation = strtolower($result['TABLE_COLLATION'] ?? '');
+
+        if ($actual_collation !== $collation) {
+            return false;
+        }
+    }
+
+    return true;
 }
